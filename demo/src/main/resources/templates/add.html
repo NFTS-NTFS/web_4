@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>添加新的联系人页面</title>
+</head>
+<body>
+<style>
+    .MYform{width: 250px; margin: auto; padding: 10px;background-color: aquamarine;font-family: 楷体;font-size: x-large; }
+    body{background-color: blanchedalmond; }
+    .title{margin: auto; width: 180px;text-align: center;font-family:楷体;font-size: 24px;color: indigo;}
+</style>
+<script>
+    function check(){//检查输入的正确性
+        var name = document.getElementById("name").value;
+        var tel = document.getElementById("tel").value;
+        var mail = document.getElementById("mail").value;
+        var location = document.getElementById("address").value;
+        var qq = document.getElementById("qq").value;
+
+        empty = /^[ ]+$/;
+        if(name == null || name == '' || name.indexOf(" ") != -1){//indexof判断输入是否含有字符串
+            alert("请输入名字!")
+            return false;
+        }
+        digit = /^\d*$/;//数字的正则表达式
+        if(!digit.test(tel) || tel.length == 0){
+            alert("请填写数字号码!")
+            return false;
+        }
+
+        if(tel.length != 11){
+            alert("电话号码位数错误！请填写十一位电话号码");
+            return false;
+        }
+        var re=/^\w+@[a-z0-9]+\.[a-z]+$/i;//邮箱的正则表达式
+        if(!re.test(mail) || mail.length == 0){
+            alert("邮箱格式错误！");
+            return false;
+        }
+
+        if(location.length == 0){
+            alert("请输入地址！");
+            return false;
+
+        }
+
+        if(!digit.test(qq) || qq.length<5 || qq.length >10){
+            alert("请输入正确的QQ号码！");
+            return false;
+        }
+        return true;
+    }
+
+</script>
+<p class="title"><b>添加新的联系人</b></p>
+<form class="MYform" th:action="@{/add/post}" method="post" onsubmit="return check()">
+    姓名<input type="text" name="name"  id="name"/><br>
+    电话<input type="text" name="tel" id="tel"/><br>
+    邮箱<input type="text" name="mail"  id="mail"/><br>
+    住址<input type="text" name="address" id="address"/><br>
+    Q Q <input type="text" name="qq"  id="qq"/><br>
+    <input type="submit" value="提交"/>
+</form>
+
+</body>
+</html>

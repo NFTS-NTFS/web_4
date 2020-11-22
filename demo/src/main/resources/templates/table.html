@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>通讯录列表页面</title>
+</head>
+<body>
+<style>
+    h1{text-align:center;font-family: cursive;}
+    .tips{font-family: 楷体;text-align: center;margin: auto;font-size: 18px;}
+    body{background-color: rgba(23, 223, 213, 0.445);}
+    .list{background-color:rgb(234, 234, 241);width: 1000px;margin: 0 auto; }
+    .option{background-color: rgba(255, 0, 98, 0.39); border:2px;padding: 1px;margin: 0 auto;}
+    .list.th,td{padding:4px;color: rgba(238, 12, 61, 0.507);}
+</style>
+<h1>通讯录列表页面</h1>
+<p class="tips" style="background-color:rgb(39, 168, 56); color: rgba(255, 0, 0, 0.658);">
+    <b>测试联系人样例</b>
+</p>
+<table class="list" border="1" >
+    <tr>
+        <th>姓名</th>
+        <th>电话</th>
+        <th>邮箱</th>
+        <th>住址</th>
+        <th>QQ</th>
+        <th>编辑操作</th>
+        <th>删除操作</th>
+    </tr>
+    <tr  th:each="linkman_info : ${linkman}">
+        <td th:text="${linkman_info.Getname()}"></td>
+        <td th:text="${linkman_info.Gettel()}"></td>
+        <td th:text="${linkman_info.Getmail()}"></td>
+        <td th:text="${linkman_info.Getaddress()}"></td>
+        <td th:text="${linkman_info.Getqq()}"></td>
+
+        <!-- 编辑-->
+        <form th:action="@{'/table/edit/' + ${linkman_info.Getname()}}" method="get">
+            <td><input type="submit" name="" value="编辑" class="button">
+        </form>
+        <!-- 删除-->
+        <form th:action="@{'/table/delete/' + ${linkman_info.Getname()}}" method="get">
+            <td><input type="submit" name="" value="删除" class="button">
+        </form>
+    </tr>
+</table>
+<!--添加按钮-->
+<form th:action="@{/add}" method="get">
+    <div style="text-align: center; margin-right:40px;">
+        <input type="submit" value="添加"  class="button" id="add"></a>
+    </div>
+</form>
+<br>
+<script>
+</script>
+</body>
