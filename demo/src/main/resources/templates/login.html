@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>登录页面</title>
@@ -29,7 +29,7 @@
         font-family:楷体; font-size:16px; color:#336699; text-align:center; line-height:200%;
     }
 </style>
-<form name="MYform" method="GET" action="/table" onsubmit="return CheckForm()">
+<form name="MYform" method="post" th:action="@{/login/input}" onsubmit="return CheckForm()">
     用户名<input type="text" id="username" name="user"> <br>
     密 码 <input type="password" id="pass" name="password"><br>
     <input type="submit" value="登录" ><br>

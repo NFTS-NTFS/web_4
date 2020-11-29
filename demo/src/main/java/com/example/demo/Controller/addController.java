@@ -1,10 +1,15 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
+import com.example.demo.linkman.linkman;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,6 +28,13 @@ public class addController {
     @RequestMapping("/login")
     public String login(Model model){
         return "login";
+    }
+
+    @PostMapping("/login/input")
+    public String login_post(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        session.setAttribute("User", "admin");
+        return "redirect:/table";
     }
 
     @RequestMapping("/add")//点击添加按钮之后，利用ModelAndView，由控制器生成一个linkman实例对象返回给add.html
@@ -83,5 +95,12 @@ public class addController {
         linkman l= new linkman(name,tel,mail,address,qq);
         linkmanList.set(edit_id,l);
         return  "redirect:/table";
+    }
+    @RequestMapping("/logout")
+    public String logout(RedirectAttributes attributes, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        /*执行登出*/
+        session.removeAttribute("User");
+        return "redirect:/login";
     }
 }

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.linkman;
 public class linkman {
     public String name;
     public String tel;
